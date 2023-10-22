@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cookie Cruncher</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #e6f7ff; /* Warna latar belakang yang lebih menarik */
+        }
+
+        #gameContainer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background-color: #fff;
+            border: 2px solid  #683e00; /* Warna border yang menarik */
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Bayangan yang lebih menarik */
+        }
+
+        #gameCanvas {
+            border: 2px solid  #683e00; /* Warna border yang serupa dengan container */
+            border-radius: 10px;
+        }
+
+        #startButton {
+            display: block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 24px;
+            background-color: #683e00; /* Warna tombol yang menarik */
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #startButton:hover {
+            background-color:  #683e00; /* Warna saat tombol ditekan */
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 18px;
+            border: 2px solid  #683e00; /* Warna border yang serupa dengan tombol */
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        #gameInfo {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <h2 id="gameInfo">Score: 0 | Lives: 3 | Level: 1</h2>
+        <h2 id="score">Score: 0</h2>
+        <h2 id="lives">Lives: 3</h2>
+        <h2 id="level">Level: 1</h2>
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+        <img id="cookieImage" src="Cookie.png" alt="Cookie Emoji" style="width: 100px; height: 100px; display: none;">
+        <input type="text" id="inputNama" placeholder="Masukkan Nama Anda" required>
+        <button id="startButton">Start Game</button>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>

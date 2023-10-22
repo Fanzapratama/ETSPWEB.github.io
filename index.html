@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #393e46;
+            text-align: center;
+            margin: 0;
+            color: #eee;
+        }
+
+        h2 {
+            color: #00adb5;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 20px auto;
+            background-color: #222831;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        label,
+        input {
+            display: block;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #00adb5;
+            border-radius: 5px;
+            background-color: #393e46;
+            color: #eee;
+        }
+
+        input[type="submit"] {
+            background-color: #00adb5;
+            color: #eee;
+            border: none;
+            padding: 12px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #393e46;
+        }
+
+        p#loginResult {
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+
+        a {
+            color: #00adb5;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2>Login</h2>
+    <form id="loginForm">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <input type="submit" value="Login">
+        <p id="loginResult"></p>
+
+        <p>Belum Punya Akun?</p>
+        <a href="register.html">Buat Akun</a>
+    </form>
+
+    <script>
+        var docRes = document.getElementById("loginResult");
+
+        document.getElementById('loginForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+
+            fetch('https://ets-pemrograman-web-f.cyclic.app/users/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                if (data.status == "success") {
+                    localStorage.setItem('userToken', data.data.access_token);
+                    window.location.href = 'scoreboard.html';
+                } else {
+                    docRes.textContent = "Login Gagal " + data.error;
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
